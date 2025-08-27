@@ -67,7 +67,7 @@ window.addEventListener('load', function() {
     if ($('#waitlist-form').length) {
         $(function () {
             const scriptURL =
-                'https://script.google.com/macros/s/AKfycbyQKeIek4qX7uYjlhtLJ9nvotj5Ab8vJbLPpsDYaf6NYD3KeQN3xBybpZiCwtExJ5gS/exec';
+                'https://script.google.com/macros/s/AKfycbyBFYRIJPgeA503Q8SW0wvmo8dssUm7Mhl9iI9NDjsib5411Rq1AuWchRf3S_S-seYJ/exec';
             const form = document.getElementById('waitlist-form');
         
             form.addEventListener('submit', (e) => {
@@ -79,7 +79,7 @@ window.addEventListener('load', function() {
         
                 e.preventDefault();
         
-                // Crear FormData para incluir archivo y otros campos
+                // Create a FormData to include file and other fields
                 const formData = new FormData(form);
         
                 fetch(scriptURL, { method: 'POST', body: formData })
