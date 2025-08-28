@@ -11,7 +11,7 @@ window.addEventListener('load', function() {
     if (window.matchMedia('(min-width: 575px)').matches) {
         scrollValue = 1;
     } else{
-        scrollValue = 600;
+        scrollValue = 550;
     }
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
@@ -70,6 +70,9 @@ window.addEventListener('load', function() {
             if (toAnimate.length > 0) {
                 const chars = toAnimate.flatMap(el => el.querySelectorAll('.char'));
 
+                gsap.set("[data-type]", { 
+                    opacity: 1,
+                });
                 gsap.to(chars, {
                     opacity: 1,
                     delay: 0.2,
