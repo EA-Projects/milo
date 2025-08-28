@@ -8,9 +8,14 @@ window.addEventListener('load', function() {
     }); 
 
     // Fix navbar when scroll
+    if (window.matchMedia('(min-width: 575px)').matches) {
+        scrollValue = 1;
+    } else{
+        scrollValue = 600;
+    }
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
-        if (scroll >= 1) {
+        if (scroll >= scrollValue) {
             $('nav').addClass('scrolled');
         } 
         else {
@@ -19,35 +24,73 @@ window.addEventListener('load', function() {
     });
 
     // Animations
-    let animatedElements = new Set();
+    if ($('[data-fade]').length) {
+        let animatedElements = new Set();
+    
+        let observer = new IntersectionObserver((entries) => {
+            const toAnimate = entries
+                .filter(entry => entry.isIntersecting && !animatedElements.has(entry.target))
+                .map(entry => entry.target);
+    
+            if (toAnimate.length > 0) {
+                gsap.to(toAnimate, {
+                    opacity: 1,
+                    y: 0,
+                    stagger: 0.15,
+                    ease: "power2.out",
+                    duration: 0.5,
+                    delay: 0.3
+                });
+    
+                toAnimate.forEach(el => {
+                    animatedElements.add(el);
+                    observer.unobserve(el);
+                });
+            }
+        }, {
+            threshold: 0.3
+        });
+    
+        document.querySelectorAll("[data-fade]").forEach((el) => {
+            observer.observe(el);
+        });
+    }
 
-    let observer = new IntersectionObserver((entries) => {
-        const toAnimate = entries
-            .filter(entry => entry.isIntersecting && !animatedElements.has(entry.target))
-            .map(entry => entry.target);
+    if ($('[data-type]').length) {
+        let animatedElements = new Set();
 
-        if (toAnimate.length > 0) {
-            gsap.to(toAnimate, {
-                opacity: 1,
-                y: 0,
-                stagger: 0.15,
-                ease: "power2.out",
-                duration: 0.5,
-                delay: 0.3
-            });
+        // Split the text into characters
+        let splitText = new SplitType("[data-type]");
 
-            toAnimate.forEach(el => {
-                animatedElements.add(el);
-                observer.unobserve(el);
-            });
-        }
-    }, {
-        threshold: 0.3
-    });
+        let observer = new IntersectionObserver((entries) => {
+            const toAnimate = entries
+                .filter(entry => entry.isIntersecting && !animatedElements.has(entry.target))
+                .map(entry => entry.target);
 
-    document.querySelectorAll("[data-fade]").forEach((el) => {
-        observer.observe(el);
-    });
+            if (toAnimate.length > 0) {
+                const chars = toAnimate.flatMap(el => el.querySelectorAll('.char'));
+
+                gsap.to(chars, {
+                    opacity: 1,
+                    delay: 0.2,
+                    duration: 0.2,
+                    stagger: 0.010,
+                });
+
+                toAnimate.forEach(el => {
+                    animatedElements.add(el);
+                    observer.unobserve(el);
+                });
+            }
+        }, {
+            threshold: 0.3
+        });
+
+        document.querySelectorAll("[data-type]").forEach((el) => {
+            observer.observe(el);
+        });
+    }
+
 
     // Slick slider for How It Works section
     $('.slide-how-it-works').slick({

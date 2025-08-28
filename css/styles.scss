@@ -173,6 +173,10 @@ section{
     opacity: 0;
 }
 
+[data-type] .char{
+    opacity: 0;
+}
+
 nav{
     width: 100%;
     position: absolute;
@@ -190,7 +194,7 @@ nav{
         justify-content: space-between;
         align-items: center;
         img{
-            max-width: 128px;
+            max-width: 110px;
             transition: all .4s ease-in-out;
         }
     }
@@ -204,7 +208,7 @@ nav{
         position: fixed;
         .inner-navigation{
             img{
-                max-width: 100px;
+                max-width: 90px;
             }
             .button{
                 font-size: 14px;
@@ -213,7 +217,10 @@ nav{
         }
     }
     @media(max-width: 575px){
+        position: fixed;
         padding: 15px 0;
+        opacity: 0;
+        top: -65px;
         .inner-navigation{
             img{
                 max-width: 75px;
@@ -224,6 +231,8 @@ nav{
             }
         }
         &.scrolled{
+            opacity: 1;
+            top: 0;
             .inner-navigation{
                 img{
                     max-width: 75px;
@@ -245,7 +254,7 @@ nav{
             gap: 20px;
             img{
                 position: relative;
-                top: -25px;
+                top: -26px;
                 max-width: 250px;
             }
         }
@@ -308,6 +317,7 @@ nav{
         }
     }
     @media(max-width: 575px){
+        padding-top: 80px;
         overflow: hidden;
         .inner-hero-content{
             h1{
