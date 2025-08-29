@@ -142,7 +142,7 @@ p, .p{
     text-decoration: none;
     border-radius: 50px;
     padding: 12px 30px 10px;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 120%;
     text-transform: uppercase;
     font-weight: 600;
@@ -212,7 +212,6 @@ nav{
                 max-width: 90px;
             }
             .button{
-                font-size: 14px;
                 padding: 8px 20px 6px;
             }
         }
@@ -227,7 +226,6 @@ nav{
                 max-width: 75px;
             }
             .button{
-                font-size: 14px;
                 padding: 8px 20px 6px;
             }
         }
@@ -536,16 +534,23 @@ nav{
 #milo-billboard{
     padding: 0;
     background-color: $white;
+    .inner-billboard{
+        width: 100%;
+        min-height: 900px;
+        background-image: url('../public/images/milo-billboard.webp');
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
     img{
         display: block;
         width: 100%;
     }
-    @media(min-width: 1600px){
-        padding: 50px 0 100px;
-        img{
-            max-width: 1440px;
-            margin: 0 auto;
-            border-radius: 20px;
+    @media(max-width: 767px){
+        .inner-billboard{
+            background-attachment: initial;
+            min-height: 65vw;
         }
     }
 }
@@ -659,8 +664,8 @@ nav{
                     gap: 5px;
                     cursor: pointer;
                     input{
-                        height: 25px;
-                        width: 25px;
+                        height: 20px;
+                        width: 20px;
                     }
                     span{
                         line-height: 150%;
